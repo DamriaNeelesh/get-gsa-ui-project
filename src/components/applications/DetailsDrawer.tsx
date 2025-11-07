@@ -133,7 +133,7 @@ export const DetailsDrawer = ({
                       </ol>
                     </section>
 
-                    <section className="grid grid-cols-2 gap-4 text-sm">
+                    <section className="grid grid-cols-1 gap-4 text-sm sm:grid-cols-2">
                       <div className="rounded-xl border border-neutral-200 p-4">
                         <span className="text-xs font-semibold uppercase tracking-wide text-neutral-500">
                           Due date

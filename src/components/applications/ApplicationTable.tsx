@@ -47,8 +47,9 @@ export const ApplicationTable = ({
   highlightTerms,
 }: ApplicationTableProps) => {
   return (
-    <div className="overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-subtle">
-      <table className="min-w-full divide-y divide-neutral-200 text-left">
+    <div className="rounded-2xl border border-neutral-200 bg-white shadow-subtle">
+      <div className="w-full overflow-x-auto">
+        <table className="min-w-[720px] divide-y divide-neutral-200 text-left">
         <thead className="bg-neutral-50 text-xs uppercase tracking-wide text-neutral-500">
           <tr>
             <th scope="col" className="px-4 py-3 font-semibold">
@@ -141,7 +142,8 @@ export const ApplicationTable = ({
             );
           })}
         </tbody>
-      </table>
+        </table>
+      </div>
     </div>
   );
 };

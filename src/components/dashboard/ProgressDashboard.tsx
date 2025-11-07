@@ -43,11 +43,11 @@ export const ProgressDashboard = ({
           </p>
         </header>
 
-        <dl className="grid grid-cols-2 gap-3 text-sm sm:grid-cols-3">
+        <dl className="grid grid-cols-2 gap-3 text-sm sm:grid-cols-3 lg:grid-cols-5">
           {STATUSES.map((status) => (
             <div
               key={status}
-              className="rounded-xl border border-neutral-100 bg-neutral-50 px-3 py-2"
+              className="rounded-xl border border-neutral-100 bg-neutral-50 px-3 py-2 transition hover:-translate-y-0.5 hover:shadow-subtle"
             >
               <dt className="text-xs font-medium uppercase tracking-wide text-neutral-500">
                 {status}

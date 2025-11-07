@@ -72,7 +72,7 @@ export const ApplicationCard = ({
       className="focus-ring flex flex-col gap-4 rounded-2xl border border-neutral-200 bg-white p-5 shadow-subtle transition hover:-translate-y-0.5 hover:shadow-card"
       aria-label={`View ${application.title}`}
     >
-      <div className="flex items-start justify-between gap-4">
+      <div className="flex flex-wrap items-start justify-between gap-4">
         <div className="flex flex-col gap-1">
           <h3 className="text-lg font-semibold text-neutral-900">
             {renderWithHighlight(application.title, highlightTerms)}
@@ -111,19 +111,19 @@ export const ApplicationCard = ({
           </span>
         ))}
       </div>
-      <div className="flex items-center justify-between gap-4">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex flex-col">
           <span className="text-xs font-medium text-neutral-500">
             % complete
           </span>
-          <div className="mt-1 h-2 w-32 rounded-full bg-neutral-100">
+          <div className="mt-1 h-2 w-full rounded-full bg-neutral-100 sm:w-32">
             <div
               className="h-2 rounded-full bg-accent transition-all"
               style={{ width: `${application.percentComplete}%` }}
             />
           </div>
         </div>
-        <div className="flex flex-col text-right">
+        <div className="flex flex-col text-left sm:text-right">
           <span className="text-xs font-medium text-neutral-500">
             Ceiling
           </span>
