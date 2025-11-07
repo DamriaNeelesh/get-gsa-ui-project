@@ -262,16 +262,32 @@ export const HomeClient = () => {
   const totalMatches = filteredApplications.length;
 
   return (
-    <main className="bg-neutral-50 pb-12">
-      <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 pt-8 sm:px-6 lg:flex-row lg:gap-8 lg:px-10">
-        <aside className="flex w-full flex-col gap-5 rounded-2xl border border-neutral-200 bg-white p-6 shadow-subtle lg:sticky lg:top-8 lg:h-fit lg:w-80">
-          <header className="space-y-2">
-            <h1 className="text-2xl font-semibold text-neutral-900">Opportunity criteria</h1>
-            <p className="text-sm text-neutral-500">
-              Dial in search settings and capture them for reuse. Filters persist across visits.
-            </p>
-          </header>
-          <div className="space-y-4">
+    <main className="min-h-screen bg-neutral-50 pb-16">
+      <div className="mx-auto w-full max-w-7xl px-4 pt-10 text-center sm:px-6 lg:px-12">
+        <h1 className="text-3xl font-bold text-neutral-900 sm:text-4xl">Get-GSA UI</h1>
+      </div>
+      <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-4 pb-4 pt-6 sm:px-6 lg:px-12">
+        <div className="flex flex-col gap-2 text-center lg:text-left">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
+            Opportunity explorer
+          </p>
+          <h2 className="text-3xl font-semibold text-neutral-900 sm:text-4xl">
+            Shape strategy and track outcomes in one responsive workspace
+          </h2>
+          <p className="mx-auto max-w-3xl text-sm text-neutral-500 lg:mx-0">
+            Use criteria, dashboards, and saved presets to steer capture activity. Layouts adjust seamlessly across devices so you can review opportunities anywhere.
+          </p>
+        </div>
+
+        <div className="grid gap-6 lg:grid-cols-[minmax(0,22rem)_minmax(0,1fr)] lg:items-start lg:gap-10">
+          <aside className="flex w-full flex-col gap-5 rounded-2xl border border-neutral-200 bg-white p-6 shadow-subtle lg:sticky lg:top-12 lg:h-fit">
+            <header className="space-y-2">
+              <h3 className="text-2xl font-semibold text-neutral-900">Opportunity criteria</h3>
+              <p className="text-sm text-neutral-500">
+                Dial in search settings and capture them for reuse. Filters persist across visits.
+              </p>
+            </header>
+            <div className="space-y-4">
             <SelectField
               id="naics"
               label="NAICS"
@@ -387,13 +403,13 @@ export const HomeClient = () => {
           </div>
         </aside>
 
-        <section className="flex min-h-screen flex-1 flex-col gap-6 pb-16">
+        <section className="flex min-h-full flex-1 flex-col gap-6 pb-16">
           <div className="grid gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
             <div className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-subtle">
               <div className="flex flex-col gap-4">
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <div>
-                    <h2 className="text-xl font-semibold text-neutral-900">{totalMatches} applications</h2>
+                    <h3 className="text-xl font-semibold text-neutral-900">{totalMatches} applications</h3>
                     <p className="text-sm text-neutral-500">
                       Results update after Apply. Keyword search is debounced for speed.
                     </p>
@@ -487,9 +503,9 @@ export const HomeClient = () => {
               )
             ) : (
               <div className="flex flex-col items-center justify-center gap-3 rounded-2xl border border-dashed border-neutral-300 bg-white p-12 text-center">
-                <h3 className="text-lg font-semibold text-neutral-800">
+                <h4 className="text-lg font-semibold text-neutral-800">
                   No applications match your filters yet
-                </h3>
+                </h4>
                 <p className="max-w-md text-sm text-neutral-500">
                   Try widening your date range, clearing the ceiling limits, or removing a keyword to explore adjacent opportunities.
                 </p>
@@ -501,6 +517,7 @@ export const HomeClient = () => {
           </div>
         </section>
       </div>
+    </div>
       <DetailsDrawer
         application={activeApplication}
         open={Boolean(activeApplication)}
