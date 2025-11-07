@@ -62,8 +62,7 @@ export const MultiSelectField = ({
                   <Chip
                     key={value}
                     label={options.find((option) => option.value === value)?.label ?? value}
-                    onRemove={(event) => {
-                      event?.stopPropagation?.();
+                    onRemove={() => {
                       handleToggle(value);
                     }}
                   />

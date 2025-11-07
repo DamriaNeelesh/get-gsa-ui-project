@@ -21,7 +21,11 @@ export const Chip = ({ label, onRemove, className }: ChipProps) => {
       {onRemove ? (
         <button
           type="button"
-          onClick={onRemove}
+          onClick={(event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            onRemove();
+          }}
           className="focus-ring rounded-full p-0.5 text-accent hover:text-accent/80"
           aria-label={`Remove ${label}`}
         >
