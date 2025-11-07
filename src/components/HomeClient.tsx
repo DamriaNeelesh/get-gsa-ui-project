@@ -262,112 +262,144 @@ export const HomeClient = () => {
   const totalMatches = filteredApplications.length;
 
   return (
-    <main className="bg-neutral-50 pb-12">
-      <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 pt-8 sm:px-6 lg:flex-row lg:gap-8 lg:px-10">
-        <aside className="flex w-full flex-col gap-5 rounded-2xl border border-neutral-200 bg-white p-6 shadow-subtle lg:sticky lg:top-8 lg:h-fit lg:w-80">
-          <header className="space-y-2">
-            <h1 className="text-2xl font-semibold text-neutral-900">Opportunity criteria</h1>
-            <p className="text-sm text-neutral-500">
-              Dial in search settings and capture them for reuse. Filters persist across visits.
-            </p>
-          </header>
-          <div className="space-y-4">
-            <SelectField
-              id="naics"
-              label="NAICS"
-              placeholder="Select NAICS"
-              value={filters.naics}
-              onChange={(value) => setFilters((prev) => ({ ...prev, naics: value }))}
-              options={naicsOptions}
-            />
-            <MultiSelectField
-              id="set-aside"
-              label="Set-Aside"
-              placeholder="Add set-asides"
-              values={filters.setAsides}
-              onChange={(values) => setFilters((prev) => ({ ...prev, setAsides: values }))}
-              options={setAsideOptions}
-            />
-            <SelectField
-              id="vehicle"
-              label="Vehicle"
-              placeholder="Select vehicle"
-              value={filters.vehicle}
-              onChange={(value) => setFilters((prev) => ({ ...prev, vehicle: value }))}
-              options={vehicleOptions}
-            />
-            <AgencyCombobox
-              id="agency"
-              label="Agencies"
-              options={agencyOptions}
-              values={filters.agencies}
-              onChange={(values) => setFilters((prev) => ({ ...prev, agencies: values }))}
-            />
-            <PeriodField value={filters.period} onChange={(period) => setFilters((prev) => ({ ...prev, period }))} />
-            <fieldset className="flex flex-col gap-2">
-              <legend className="text-sm font-medium text-neutral-700">Ceiling</legend>
-              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                <div className="flex flex-col gap-1">
-                  <label htmlFor="ceiling-min" className="text-xs font-medium text-neutral-500">
-                    Minimum
-                  </label>
-                  <input
-                    id="ceiling-min"
-                    inputMode="numeric"
-                    type="number"
-                    value={formatNumberInput(filters.ceiling.min)}
-                    onChange={(event) => {
-                      const value = event.target.value;
-                      const next = value === "" ? null : Number(value);
-                      setFilters((prev) => ({
-                        ...prev,
-                        ceiling: { ...prev.ceiling, min: Number.isNaN(next) ? null : next },
-                      }));
-                    }}
-                    className="focus-ring rounded-lg border border-neutral-200 px-3 py-2 text-sm shadow-sm"
-                    aria-invalid={Boolean(ceilingError)}
-                    aria-describedby="ceiling-helper"
-                  />
-                </div>
-                <div className="flex flex-col gap-1">
-                  <label htmlFor="ceiling-max" className="text-xs font-medium text-neutral-500">
-                    Maximum
-                  </label>
-                  <input
-                    id="ceiling-max"
-                    inputMode="numeric"
-                    type="number"
-                    value={formatNumberInput(filters.ceiling.max)}
-                    onChange={(event) => {
-                      const value = event.target.value;
-                      const next = value === "" ? null : Number(value);
-                      setFilters((prev) => ({
-                        ...prev,
-                        ceiling: { ...prev.ceiling, max: Number.isNaN(next) ? null : next },
-                      }));
-                    }}
-                    className="focus-ring rounded-lg border border-neutral-200 px-3 py-2 text-sm shadow-sm"
-                    aria-invalid={Boolean(ceilingError)}
-                    aria-describedby="ceiling-helper"
-                  />
-                </div>
-              </div>
-              <p id="ceiling-helper" className={clsx("text-xs", ceilingError ? "text-danger" : "text-neutral-500")}>
-                {ceilingError ?? "Leave blank for no ceiling limit."}
+    <main className="min-h-screen bg-neutral-50 pb-16">
+      <div className="mx-auto w-full max-w-7xl px-4 pt-8 text-center sm:px-6 lg:px-10 xl:px-12">
+        <h1 className="text-balance text-3xl font-bold text-neutral-900 sm:text-4xl lg:text-5xl">
+          Get-GSA UI
+        </h1>
+      </div>
+      <div className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-4 pb-4 pt-6 sm:px-6 lg:px-10 xl:px-12">
+        <div className="flex flex-col gap-3 text-center lg:max-w-4xl lg:text-left">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
+            Opportunity explorer
+          </p>
+          <h2 className="text-balance text-3xl font-semibold text-neutral-900 sm:text-4xl lg:text-5xl">
+            Shape strategy and track outcomes in one responsive workspace
+          </h2>
+          <p className="mx-auto max-w-2xl text-sm leading-6 text-neutral-500 lg:mx-0">
+            Use criteria, dashboards, and saved presets to steer capture activity. Layouts adjust seamlessly across phones, tablets, and desktops so you can review opportunities anywhere.
+          </p>
+        </div>
+
+        <div className="grid gap-6 lg:grid-cols-[minmax(0,22rem)_minmax(0,1fr)] lg:items-start lg:gap-10 xl:grid-cols-[minmax(0,24rem)_minmax(0,1fr)]">
+          <aside className="flex w-full flex-col gap-5 rounded-2xl border border-neutral-200 bg-white p-5 shadow-subtle sm:p-6 lg:sticky lg:top-20 lg:h-fit lg:p-7">
+            <header className="space-y-2">
+              <h3 className="text-2xl font-semibold text-neutral-900">Opportunity criteria</h3>
+              <p className="text-sm text-neutral-500">
+                Dial in search settings and capture them for reuse. Filters persist across visits.
               </p>
-            </fieldset>
-            <KeywordInput values={filters.keywords} onChange={(keywords) => setFilters((prev) => ({ ...prev, keywords }))} />
-          </div>
+            </header>
+            <div className="space-y-4">
+              <SelectField
+                id="naics"
+                label="NAICS"
+                placeholder="Select NAICS"
+                value={filters.naics}
+                onChange={(value) => setFilters((prev) => ({ ...prev, naics: value }))}
+                options={naicsOptions}
+              />
+              <MultiSelectField
+                id="set-aside"
+                label="Set-Aside"
+                placeholder="Add set-asides"
+                values={filters.setAsides}
+                onChange={(values) => setFilters((prev) => ({ ...prev, setAsides: values }))}
+                options={setAsideOptions}
+              />
+              <SelectField
+                id="vehicle"
+                label="Vehicle"
+                placeholder="Select vehicle"
+                value={filters.vehicle}
+                onChange={(value) => setFilters((prev) => ({ ...prev, vehicle: value }))}
+                options={vehicleOptions}
+              />
+              <AgencyCombobox
+                id="agency"
+                label="Agencies"
+                options={agencyOptions}
+                values={filters.agencies}
+                onChange={(values) => setFilters((prev) => ({ ...prev, agencies: values }))}
+              />
+              <PeriodField value={filters.period} onChange={(period) => setFilters((prev) => ({ ...prev, period }))} />
+              <fieldset className="flex flex-col gap-2">
+                <legend className="text-sm font-medium text-neutral-700">Ceiling</legend>
+                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                  <div className="flex flex-col gap-1">
+                    <label htmlFor="ceiling-min" className="text-xs font-medium text-neutral-500">
+                      Minimum
+                    </label>
+                    <input
+                      id="ceiling-min"
+                      inputMode="numeric"
+                      type="number"
+                      value={formatNumberInput(filters.ceiling.min)}
+                      onChange={(event) => {
+                        const value = event.target.value;
+                        const next = value === "" ? null : Number(value);
+                        setFilters((prev) => ({
+                          ...prev,
+                          ceiling: { ...prev.ceiling, min: Number.isNaN(next) ? null : next },
+                        }));
+                      }}
+                      className="focus-ring rounded-lg border border-neutral-200 px-3 py-2 text-sm shadow-sm"
+                      aria-invalid={Boolean(ceilingError)}
+                      aria-describedby="ceiling-helper"
+                    />
+                  </div>
+                  <div className="flex flex-col gap-1">
+                    <label htmlFor="ceiling-max" className="text-xs font-medium text-neutral-500">
+                      Maximum
+                    </label>
+                    <input
+                      id="ceiling-max"
+                      inputMode="numeric"
+                      type="number"
+                      value={formatNumberInput(filters.ceiling.max)}
+                      onChange={(event) => {
+                        const value = event.target.value;
+                        const next = value === "" ? null : Number(value);
+                        setFilters((prev) => ({
+                          ...prev,
+                          ceiling: { ...prev.ceiling, max: Number.isNaN(next) ? null : next },
+                        }));
+                      }}
+                      className="focus-ring rounded-lg border border-neutral-200 px-3 py-2 text-sm shadow-sm"
+                      aria-invalid={Boolean(ceilingError)}
+                      aria-describedby="ceiling-helper"
+                    />
+                  </div>
+                </div>
+                <p id="ceiling-helper" className={clsx("text-xs", ceilingError ? "text-danger" : "text-neutral-500")}>
+                  {ceilingError ?? "Leave blank for no ceiling limit."}
+                </p>
+              </fieldset>
+              <KeywordInput
+                values={filters.keywords}
+                onChange={(keywords) => setFilters((prev) => ({ ...prev, keywords }))}
+              />
+            </div>
           <div className="mt-4 flex flex-col gap-3">
-            <div className="flex flex-wrap gap-2">
-              <Button type="button" variant="secondary" onClick={handleSavePreset}>
+            <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap">
+              <Button
+                type="button"
+                variant="secondary"
+                onClick={handleSavePreset}
+                className="w-full sm:w-auto"
+              >
                 Save preset
               </Button>
-              <Button type="button" variant="ghost" onClick={handleLoadPreset} disabled={!hasPreset}>
+              <Button
+                type="button"
+                variant="ghost"
+                onClick={handleLoadPreset}
+                disabled={!hasPreset}
+                className="w-full sm:w-auto"
+              >
                 Load preset
               </Button>
             </div>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap">
               <Button
                 type="button"
                 variant="primary"
@@ -377,7 +409,12 @@ export const HomeClient = () => {
               >
                 {isApplying ? "Applying..." : "Apply"}
               </Button>
-              <Button type="button" variant="ghost" onClick={handleReset}>
+              <Button
+                type="button"
+                variant="ghost"
+                onClick={handleReset}
+                className="w-full sm:w-auto"
+              >
                 Reset all
               </Button>
             </div>
@@ -387,20 +424,20 @@ export const HomeClient = () => {
           </div>
         </aside>
 
-        <section className="flex min-h-screen flex-1 flex-col gap-6 pb-16">
+        <section className="flex min-h-full flex-1 flex-col gap-6 pb-16">
           <div className="grid gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
-            <div className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-subtle">
-              <div className="flex flex-col gap-4">
-                <div className="flex flex-wrap items-center justify-between gap-3">
-                  <div>
-                    <h2 className="text-xl font-semibold text-neutral-900">{totalMatches} applications</h2>
+            <div className="rounded-2xl border border-neutral-200 bg-white p-5 shadow-subtle sm:p-6 lg:p-8">
+              <div className="flex flex-col gap-5">
+                <div className="flex flex-wrap items-center justify-between gap-4">
+                  <div className="space-y-1">
+                    <h3 className="text-xl font-semibold text-neutral-900 sm:text-2xl">{totalMatches} applications</h3>
                     <p className="text-sm text-neutral-500">
                       Results update after Apply. Keyword search is debounced for speed.
                     </p>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs font-semibold uppercase tracking-wide text-neutral-500">View</span>
-                    <div className="flex rounded-full border border-neutral-200 bg-neutral-50 p-1">
+                  <div className="flex items-center gap-2 rounded-full border border-neutral-200 bg-neutral-50 p-1">
+                    <span className="px-2 text-xs font-semibold uppercase tracking-wide text-neutral-500">View</span>
+                    <div className="flex rounded-full bg-white p-1">
                       <button
                         type="button"
                         onClick={() => setViewMode("cards")}
@@ -430,7 +467,7 @@ export const HomeClient = () => {
                     </div>
                   </div>
                 </div>
-                <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                   <label className="flex w-full items-center gap-2 rounded-xl border border-neutral-200 bg-neutral-50 px-3 py-2 text-sm text-neutral-500 sm:max-w-md">
                     <span className="sr-only">Search applications</span>
                     <input
@@ -468,7 +505,7 @@ export const HomeClient = () => {
               <ResultsSkeleton />
             ) : filteredApplications.length ? (
               viewMode === "cards" ? (
-                <div className="grid gap-4 md:grid-cols-2">
+                <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
                   {filteredApplications.map((app) => (
                     <ApplicationCard
                       key={app.id}
@@ -486,10 +523,10 @@ export const HomeClient = () => {
                 />
               )
             ) : (
-              <div className="flex flex-col items-center justify-center gap-3 rounded-2xl border border-dashed border-neutral-300 bg-white p-12 text-center">
-                <h3 className="text-lg font-semibold text-neutral-800">
+              <div className="flex flex-col items-center justify-center gap-3 rounded-2xl border border-dashed border-neutral-300 bg-white p-10 text-center sm:p-12">
+                <h4 className="text-lg font-semibold text-neutral-800">
                   No applications match your filters yet
-                </h3>
+                </h4>
                 <p className="max-w-md text-sm text-neutral-500">
                   Try widening your date range, clearing the ceiling limits, or removing a keyword to explore adjacent opportunities.
                 </p>
@@ -500,6 +537,7 @@ export const HomeClient = () => {
             )}
           </div>
         </section>
+        </div>
       </div>
       <DetailsDrawer
         application={activeApplication}
